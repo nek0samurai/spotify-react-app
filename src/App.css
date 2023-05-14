@@ -1,0 +1,43 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.main-title {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.row {
+    max-width: 1280px;
+    margin: auto;
+}
+
+.card-row {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.card {
+    border-radius: 10px;
+    background-color: #ffffff23;
+    flex: 0 0 20%;
+    color: #242424;
+}
+
+.card__img {
+    border-radius: 10px 10px 0px 0px;
+}
+
+.card__info {
+    color: #fff;
+    padding: .5rem 1rem;
+}
+
+.card__artist {
+    color: #fff;
+    font-size: .9rem;
+}
