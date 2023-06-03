@@ -2,14 +2,14 @@ import { useSelector } from 'react-redux';
 import MusicCard from './MusicCard/MusicCard';
 
 const MusicRow = () => {
-  const { songsData, activeSong, isPlaying } = useSelector((state) => state.player);
-
-  console.log(songsData);
+  const { songsData, activeSong, isPlaying, error, isLoading } = useSelector(
+    (state) => state.player,
+  );
 
   return (
     <>
-      {songsData.length === 0 ? (
-        <h1 className="card-error">Error</h1>
+      {error ? (
+        <h1>Error</h1>
       ) : (
         <div className="card-row">
           <MusicCard

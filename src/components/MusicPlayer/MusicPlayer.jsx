@@ -1,38 +1,37 @@
-import {
-  BsFillPauseCircleFill,
-  BsFillSkipStartCircleFill,
-  BsFillSkipEndCircleFill,
-  BsFillPlayCircleFill,
-} from 'react-icons/bs';
+// import {
+//   BsFillPauseCircleFill,
+//   BsFillSkipStartCircleFill,
+//   BsFillSkipEndCircleFill,
+//   BsFillPlayCircleFill,
+// } from 'react-icons/bs';
 
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { useRef, useEffect } from 'react';
+import { playPause } from '../../redux/slices/playerSlice';
 
 const MusicPlayer = () => {
-  const { activeSong } = useSelector((state) => state.player);
-  console.log(activeSong);
+  const dispatch = useDispatch();
+  const { activeSong, isPlaying, songsData, currentSongId } = useSelector((state) => state.player);
+  const ref = useRef();
+
+  useEffect(() => {
+    if (songsData.length) dispatch(playPause(true));
+  }, [dispatch, currentSongId]);
+
+  if (ref.current) {
+    if (isPlaying) {
+      ref.current.play();
+    } else {
+      ref.current.pause();
+    }
+  }
+
   return (
-    <div className="player_container">
-      <div className="title">
-        <img src={activeSong?.album?.cover_small} className="title__img" alt="" />
-        <p>
-          {activeSong?.artist?.name} - {activeSong?.title}
-        </p>
+    <>
+      <div>
+        <audio src={activeSong.preview} ref={ref}></audio>
       </div>
-      <div className="navigation">
-        <div className="navigation_wrapper">
-          <div className="seek_bar"></div>
-        </div>
-      </div>
-      <div className="controls">
-        <BsFillSkipStartCircleFill className="btn_action" />
-
-        <BsFillPauseCircleFill className="btn_action pp" />
-
-        <BsFillPlayCircleFill className="btn_action pp" />
-
-        <BsFillSkipEndCircleFill className="btn_action" />
-      </div>
-    </div>
+    </>
   );
 };
 

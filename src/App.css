@@ -99,7 +99,7 @@
 }
 
 .player_container>* {
-    padding: 1rem 0;
+    padding: .4rem 0;
     color: rgb(202, 202, 202);
 }
 
@@ -204,4 +204,8 @@
     left: 40%;
     transform: translate(-40%, -40%);
     opacity: 0;
+}
+
+.hidden {
+    display: none;
 }

@@ -5,6 +5,7 @@ import { fetchMusic, getCurrentArtist, getActiveSong } from '../actions/playerAc
 const initialState = {
   songsData: [],
   currentArtist: [],
+  currentSongId: 0,
   activeSong: {},
   isPlaying: false,
   isLoading: false,
@@ -63,6 +64,7 @@ export const playerSlice = createSlice({
       })
       .addCase(getActiveSong.fulfilled, (state, action) => {
         state.activeSong = action.payload;
+        state.currentSongId = action.payload.id;
         state.isLoading = false;
         state.error = '';
       })

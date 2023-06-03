@@ -7,12 +7,13 @@ import PlayPause from '../../PlayPause/PlayPause';
 import { useDispatch } from 'react-redux';
 import { getActiveSong } from '../../../redux/actions/playerActions';
 import { playPause } from '../../../redux/slices/playerSlice';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const MusicCard = ({ songsData, isPlaying, activeSong }) => {
   const [handleId, setHandleId] = useState();
   const dispatch = useDispatch();
-  console.log(songsData);
+
+  useEffect(() => {}, [handleId, dispatch]);
 
   const handlePlayClick = () => {
     dispatch(getActiveSong(handleId));
@@ -32,7 +33,7 @@ const MusicCard = ({ songsData, isPlaying, activeSong }) => {
               <img src={item.album.cover_medium} alt="" className="card__cover" />
               <div className="card__img-controls">
                 <PlayPause
-                  title={item.title}
+                  id={item.id}
                   isPlaying={isPlaying}
                   activeSong={activeSong}
                   handlePause={handlePauseClick}
