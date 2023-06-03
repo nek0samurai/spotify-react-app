@@ -1,19 +1,23 @@
 import { Route, Routes } from 'react-router-dom';
 
-import style from './App.css';
+import { Home, ArtistDetails } from './pages';
+// import SearchBar from './components/SearchBar/SearchBar';
 
-import { Home, ArtistDetails, Search } from './pages';
+import './App.css';
 import SearchBar from './components/SearchBar/SearchBar';
+import MusicPlayer from './components/MusicPlayer/MusicPlayer';
 
 function App() {
   return (
-    <div className="App">
-      <SearchBar />
-      <Routes>
-        <Route path="/" element={<Home />}></Route>
-        <Route path="/artists/:id" element={<ArtistDetails />}></Route>
-        <Route path="/search/:term" element={<Search />}></Route>
-      </Routes>
+    <div className="app">
+      <div className="wrapper">
+        <SearchBar />
+        <Routes>
+          <Route path="/" element={<Home />}></Route>
+          <Route path="/:id" element={<ArtistDetails />}></Route>
+        </Routes>
+      </div>
+      <MusicPlayer />
     </div>
   );
 }

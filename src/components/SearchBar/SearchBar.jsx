@@ -1,40 +1,40 @@
-import React from 'react';
-import { FiSearch } from 'react-icons/fi';
-
-import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
+import { fetchMusic } from '../../redux/actions/playerActions';
+import { FaSearch } from 'react-icons/fa';
+import { useDispatch } from 'react-redux';
+// import { useEffect } from 'react';
 
 const SearchBar = () => {
-  const navigate = useNavigate();
-  const [searchTerm, setSearchTerm] = useState('');
+  const [value, setValue] = useState('');
+  const [queryValue, setQueryValue] = useState('');
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const dispatch = useDispatch();
+  const inputRef = useRef();
 
-    navigate(`/search/${searchTerm}`);
+  const handleSubmit = () => {
+    setQueryValue(value);
+    dispatch(fetchMusic(value));
   };
+  console.log(queryValue);
+
+  const handleInputValue = (e) => {
+    setValue(e.target.value);
+  };
+
   return (
-    <form
-      onSubmit={handleSubmit}
-      autoComplete="off"
-      className="p-2 text-gray-400 focus-within:text-gray-600">
-      <label htmlFor="search-field" className="sr-only">
-        Search all files
-      </label>
-      <div className="flex flex-row justify-start items-center">
-        <FiSearch aria-hidden="true" className="w-5 h-5 ml-4" />
-        <input
-          name="search-field"
-          autoComplete="off"
-          id="search-field"
-          className="flex-1 bg-transparent border-none placeholder-gray-500 outline-none text-base text-white p-4"
-          placeholder="Search"
-          type="search"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
-      </div>
-    </form>
+    <div className="search-bar">
+      <input
+        placeholder="Введите название"
+        ref={inputRef}
+        value={value}
+        onChange={handleInputValue}
+        type="text"
+        className="input"
+      />
+      <button onClick={handleSubmit} className="search-button">
+        <FaSearch />
+      </button>
+    </div>
   );
 };
 
