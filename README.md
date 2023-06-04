@@ -1,5 +1,5 @@
 # spotify-react-app
 
-Deezer Rapid Api Quota Limit хз работает криво я всё
+Deezer Rapid Api 
 #
-Разработка музыкального приложения при помощи Spotify Rapid API, React, RTK
+Разработка музыкального приложения при помощи Deezer Rapid API, React, RTK
