@@ -6,48 +6,41 @@ import PlayPause from '../../PlayPause/PlayPause';
 
 import { useDispatch } from 'react-redux';
 import { getActiveSong } from '../../../redux/actions/playerActions';
-import { playPause } from '../../../redux/slices/playerSlice';
-import { useState, useEffect } from 'react';
+import { playPause, setActiveSong } from '../../../redux/slices/playerSlice';
 
-const MusicCard = ({ songsData, isPlaying, activeSong }) => {
-  const [handleId, setHandleId] = useState();
+const MusicCard = ({ song, isPlaying, activeSong, songsData, i }) => {
   const dispatch = useDispatch();
-
-  useEffect(() => {}, [handleId, dispatch]);
-
-  const handlePlayClick = () => {
-    dispatch(getActiveSong(handleId));
-    dispatch(playPause(true));
-  };
 
   const handlePauseClick = () => {
     dispatch(playPause(false));
   };
 
+  const handlePlayClick = () => {
+    dispatch(setActiveSong({ song, songsData, i }));
+    dispatch(playPause(true));
+  };
+
   return (
     <>
-      {songsData?.map((item) => {
-        return (
-          <div key={item.id} className="card">
-            <div className="card__img" onClick={() => setHandleId(item.id)}>
-              <img src={item.album.cover_medium} alt="" className="card__cover" />
-              <div className="card__img-controls">
-                <PlayPause
-                  id={item.id}
-                  isPlaying={isPlaying}
-                  activeSong={activeSong}
-                  handlePause={handlePauseClick}
-                  handlePlay={handlePlayClick}
-                />
-              </div>
-            </div>
-            <h3 className="card__info">{item.title} </h3>
-            <Link to={`${item.artist.id}`}>
-              <p className="card__artist">{item.artist.name}</p>
-            </Link>
+      <div key={song.id} className="card">
+        <div className="card__img">
+          <img src={song.album.cover_medium} alt="" className="card__cover" />
+          <div className="card__img-controls">
+            <PlayPause
+              id={song.id}
+              song={song}
+              isPlaying={isPlaying}
+              activeSong={activeSong}
+              handlePause={handlePauseClick}
+              handlePlay={handlePlayClick}
+            />
           </div>
-        );
-      })}
+        </div>
+        <h3 className="card__info">{song.title} </h3>
+        <Link to={`${song.artist.id}`}>
+          <p className="card__artist">{song.artist.name}</p>
+        </Link>
+      </div>
     </>
   );
 };

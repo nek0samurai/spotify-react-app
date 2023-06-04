@@ -5,9 +5,11 @@ import { fetchMusic, getCurrentArtist, getActiveSong } from '../actions/playerAc
 const initialState = {
   songsData: [],
   currentArtist: [],
-  currentSongId: 0,
+
+  currentIndex: 0,
   activeSong: {},
   isPlaying: false,
+  isActive: false,
   isLoading: false,
   error: '',
 };
@@ -23,6 +25,12 @@ export const playerSlice = createSlice({
     },
     playPause: (state, action) => {
       state.isPlaying = action.payload;
+    },
+    setActiveSong: (state, action) => {
+      state.activeSong = action.payload.song;
+
+      state.isActive = true;
+      state.currentIndex = action.payload.i;
     },
   },
   extraReducers: (builder) => {
@@ -66,16 +74,18 @@ export const playerSlice = createSlice({
         state.activeSong = action.payload;
         state.currentSongId = action.payload.id;
         state.isLoading = false;
+        state.isPlaying = true;
         state.error = '';
       })
       .addCase(getActiveSong.rejected, (state, action) => {
         state.activeSong = {};
+        state.currentSongId = 0;
         state.isLoading = false;
-        state.error = action.payload;
+        state.error = action.payload.error;
       });
   },
 });
 
-export const { setSongsData, playPause } = playerSlice.actions;
+export const { setSongsData, playPause, setActiveSong } = playerSlice.actions;
 
 export default playerSlice.reducer;

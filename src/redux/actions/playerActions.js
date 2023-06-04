@@ -10,7 +10,7 @@ export const fetchMusic = createAsyncThunk('player/fetchedMusic', async (term, t
     url: `https://deezerdevs-deezer.p.rapidapi.com/search`,
     params: { q: `${term}` },
     headers: {
-      'X-RapidAPI-Key': '6170838f77msh698f9c011dbf905p1a208bjsn4f95db7fd65d',
+      'X-RapidAPI-Key': 'ae48d365b4msh8d9458486f7aaa0p1e5ac0jsn588f6312a640',
       'X-RapidAPI-Host': 'deezerdevs-deezer.p.rapidapi.com',
     },
   };
@@ -26,12 +26,11 @@ export const fetchMusic = createAsyncThunk('player/fetchedMusic', async (term, t
 export const getCurrentArtist = createAsyncThunk(
   'player/getCurrentArtist',
   async (id, thunkAPI) => {
-    console.log(id);
     const options = {
       method: 'GET',
       url: `https://deezerdevs-deezer.p.rapidapi.com/artist/${id}`,
       headers: {
-        'X-RapidAPI-Key': '6170838f77msh698f9c011dbf905p1a208bjsn4f95db7fd65d',
+        'X-RapidAPI-Key': 'ae48d365b4msh8d9458486f7aaa0p1e5ac0jsn588f6312a640',
         'X-RapidAPI-Host': 'deezerdevs-deezer.p.rapidapi.com',
       },
     };
@@ -52,7 +51,7 @@ export const getActiveSong = createAsyncThunk('player/activeSong', async (id, th
     url: `https://deezerdevs-deezer.p.rapidapi.com/track/${id}`,
 
     headers: {
-      'X-RapidAPI-Key': '6170838f77msh698f9c011dbf905p1a208bjsn4f95db7fd65d',
+      'X-RapidAPI-Key': 'ae48d365b4msh8d9458486f7aaa0p1e5ac0jsn588f6312a640',
       'X-RapidAPI-Host': 'deezerdevs-deezer.p.rapidapi.com',
     },
   };
