@@ -11,7 +11,8 @@ const SearchBar = () => {
   const dispatch = useDispatch();
   const inputRef = useRef();
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     setQueryValue(value);
     dispatch(fetchMusic(value));
   };
@@ -22,19 +23,19 @@ const SearchBar = () => {
   };
 
   return (
-    <div className="search-bar">
-      <input
-        placeholder="Введите название"
-        ref={inputRef}
-        value={value}
-        onChange={handleInputValue}
-        type="text"
-        className="input"
-      />
-      <button onClick={handleSubmit} className="search-button">
+    <form onSubmit={handleSubmit}>
+      <div className="search-bar">
         <FaSearch />
-      </button>
-    </div>
+        <input
+          placeholder="Поиск"
+          ref={inputRef}
+          value={value}
+          onChange={handleInputValue}
+          type="text"
+          className="input"
+        />
+      </div>
+    </form>
   );
 };
 

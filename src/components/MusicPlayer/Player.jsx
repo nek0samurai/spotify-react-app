@@ -3,7 +3,6 @@ import { useRef } from 'react';
 
 const Player = ({ activeSong, isPlaying }) => {
   const ref = useRef(null);
-  console.log(ref.current);
 
   if (ref.current) {
     if (!isPlaying) {

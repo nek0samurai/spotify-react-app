@@ -5,10 +5,11 @@ import { Link } from 'react-router-dom';
 import PlayPause from '../../PlayPause/PlayPause';
 
 import { useDispatch } from 'react-redux';
-import { getActiveSong } from '../../../redux/actions/playerActions';
+
 import { playPause, setActiveSong } from '../../../redux/slices/playerSlice';
 
 const MusicCard = ({ song, isPlaying, activeSong, songsData, i }) => {
+  console.log();
   const dispatch = useDispatch();
 
   const handlePauseClick = () => {
@@ -23,23 +24,30 @@ const MusicCard = ({ song, isPlaying, activeSong, songsData, i }) => {
   return (
     <>
       <div key={song.id} className="card">
-        <div className="card__img">
-          <img src={song.album.cover_medium} alt="" className="card__cover" />
-          <div className="card__img-controls">
-            <PlayPause
-              id={song.id}
-              song={song}
-              isPlaying={isPlaying}
-              activeSong={activeSong}
-              handlePause={handlePauseClick}
-              handlePlay={handlePlayClick}
-            />
+        <div className="card__main">
+          <div className="card__img">
+            <img src={song.album.cover_medium} alt="" className="card__cover" />
+            <div className="card__img-controls">
+              <PlayPause
+                id={song.id}
+                song={song}
+                isPlaying={isPlaying}
+                activeSong={activeSong}
+                handlePause={handlePauseClick}
+                handlePlay={handlePlayClick}
+              />
+            </div>
           </div>
+          <p className="card__info">
+            {i + 1}. {song.title}
+          </p>
         </div>
-        <h3 className="card__info">{song.title} </h3>
-        <Link to={`${song.artist.id}`}>
-          <p className="card__artist">{song.artist.name}</p>
+        <Link to={`${song.artist.id}`} className="card__artist">
+          <p className="card__artist-item">{song.artist.name}</p>
         </Link>
+        <div className="card__album">
+          <p>{song.album.title}</p>
+        </div>
       </div>
     </>
   );
