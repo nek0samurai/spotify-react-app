@@ -28,9 +28,18 @@ export const playerSlice = createSlice({
     },
     setActiveSong: (state, action) => {
       state.activeSong = action.payload.song;
-
       state.isActive = true;
       state.currentIndex = action.payload.i;
+    },
+    nextSong: (state, action) => {
+      state.activeSong = state.songsData[action.payload];
+      state.currentIndex = action.payload;
+      state.isActive = true;
+    },
+    prevSong: (state, action) => {
+      state.activeSong = state.songsData[action.payload];
+      state.currentIndex = action.payload;
+      state.isActive = true;
     },
   },
   extraReducers: (builder) => {
@@ -86,6 +95,6 @@ export const playerSlice = createSlice({
   },
 });
 
-export const { setSongsData, playPause, setActiveSong } = playerSlice.actions;
+export const { setSongsData, playPause, setActiveSong, nextSong, prevSong } = playerSlice.actions;
 
 export default playerSlice.reducer;

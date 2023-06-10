@@ -2,6 +2,7 @@
 import { useRef } from 'react';
 
 const Player = ({ activeSong, isPlaying }) => {
+  console.log(activeSong);
   const ref = useRef(null);
 
   if (ref.current) {
@@ -14,11 +15,7 @@ const Player = ({ activeSong, isPlaying }) => {
     }
   }
 
-  return (
-    <div>
-      <audio src={activeSong.preview} ref={ref}></audio>
-    </div>
-  );
+  return <audio src={activeSong.preview} ref={ref}></audio>;
 };
 
 export default Player;

@@ -226,3 +226,33 @@
 .hidden {
     display: none;
 }
+
+.player {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #23232d;
+    border-top: 1px solid #32323d;
+}
+
+.player-bottom {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    align-items: center;
+}
+
+.player-controls {
+    grid-column: 2 / 3;
+}
+
+.player-track {
+    grid-column: 3 / 8;
+}
+
+.player-controls__icons {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: .4rem;
+}
