@@ -1,11 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { fetchMusic, getCurrentArtist, getActiveSong } from '../actions/playerActions';
-
+import { fetchMusic, getTopArtistTracks, getActiveSong } from '../actions/playerActions';
+// ,
 const initialState = {
   songsData: [],
   currentArtist: [],
-
+  currentArtistTopTracks: [],
   currentIndex: 0,
   activeSong: {},
   isPlaying: false,
@@ -32,7 +32,7 @@ export const playerSlice = createSlice({
       state.currentIndex = action.payload.i;
     },
     setCurrentArtist: (state, action) => {
-      state.currentArtist = state.songsData.artist;
+      state.currentArtist = action.payload;
     },
     nextSong: (state, action) => {
       state.activeSong = state.songsData[action.payload];
@@ -49,7 +49,7 @@ export const playerSlice = createSlice({
     builder
       .addCase(fetchMusic.fulfilled, (state, action) => {
         state.songsData = [...action.payload.data];
-        state.activeSong = {};
+
         state.isLoading = false;
         state.error = '';
       })
@@ -62,26 +62,26 @@ export const playerSlice = createSlice({
         state.error = action.payload;
         state.isLoading = false;
         state.songsData = [];
-      });
-    // .addCase(getCurrentArtist.fulfilled, (state, action) => {
-    //   state.currentArtist = action.payload;
+      })
+      .addCase(getTopArtistTracks.fulfilled, (state, action) => {
+        state.currentArtistTopTracks = action.payload.data;
 
-    //   state.isLoading = false;
-    //   state.error = '';
-    // })
-    // .addCase(getCurrentArtist.pending, (state) => {
-    //   state.currentArtist = [];
-    //   state.isLoading = true;
-    //   state.error = '';
-    // })
-    // .addCase(getCurrentArtist.rejected, (state, action) => {
-    //   state.error = action.payload;
-    //   state.isLoading = false;
-    //   state.currentArtist = [];
-    // })
-    // .addCase(getActiveSong.pending, (state) => {
-    //   state.isLoading = true;
-    // })
+        state.isLoading = false;
+        state.error = '';
+      })
+      .addCase(getTopArtistTracks.pending, (state) => {
+        state.currentArtistTopTracks = [];
+        state.isLoading = true;
+        state.error = '';
+      })
+      .addCase(getTopArtistTracks.rejected, (state, action) => {
+        state.error = action.payload;
+        state.isLoading = false;
+        state.currentArtistTopTracks = [];
+      })
+      .addCase(getActiveSong.pending, (state) => {
+        state.isLoading = true;
+      });
     // .addCase(getActiveSong.fulfilled, (state, action) => {
     //   state.activeSong = action.payload;
     //   state.currentSongId = action.payload.id;
@@ -98,6 +98,7 @@ export const playerSlice = createSlice({
   },
 });
 
-export const { setSongsData, playPause, setActiveSong, nextSong, prevSong } = playerSlice.actions;
+export const { setSongsData, playPause, setActiveSong, nextSong, prevSong, setCurrentArtist } =
+  playerSlice.actions;
 
 export default playerSlice.reducer;

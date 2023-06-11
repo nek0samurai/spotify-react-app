@@ -5,8 +5,8 @@ import { Link } from 'react-router-dom';
 import PlayPause from '../../PlayPause/PlayPause';
 
 import { useDispatch } from 'react-redux';
-
-import { playPause, setActiveSong } from '../../../redux/slices/playerSlice';
+import { getTopArtistTracks } from '../../../redux/actions/playerActions';
+import { playPause, setActiveSong, setCurrentArtist } from '../../../redux/slices/playerSlice';
 
 const MusicCard = ({ song, isPlaying, activeSong, songsData, i, isActive }) => {
   const dispatch = useDispatch();
@@ -14,11 +14,15 @@ const MusicCard = ({ song, isPlaying, activeSong, songsData, i, isActive }) => {
   const handlePauseClick = () => {
     dispatch(playPause(false));
   };
-  console.log(song);
 
   const handlePlayClick = () => {
     dispatch(setActiveSong({ song, songsData, i }));
     dispatch(playPause(true));
+  };
+
+  const handleArtistClick = () => {
+    dispatch(getTopArtistTracks(song.artist.tracklist));
+    dispatch(setCurrentArtist(song.artist));
   };
 
   return (
@@ -42,9 +46,9 @@ const MusicCard = ({ song, isPlaying, activeSong, songsData, i, isActive }) => {
             {i + 1}. {song.title}
           </p>
         </div>
-        <Link to={`${song.artist.id}`} className="card__artist">
-          <p className="card__artist-item">{song.artist.name}</p>
-        </Link>
+        <p className="card__artist-item" onClick={() => handleArtistClick()}>
+          {song.artist.name}
+        </p>
         <div className="card__album">
           <p>{song.album.title}</p>
         </div>

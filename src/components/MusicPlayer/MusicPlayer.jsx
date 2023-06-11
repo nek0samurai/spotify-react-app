@@ -45,42 +45,44 @@ const MusicPlayer = () => {
   };
 
   return (
-    <div className="player">
-      <div className="player-bottom">
-        <Controls
-          songsData={songsData}
-          currentIndex={currentIndex}
-          handleNextSong={handleNextSong}
-          handlePrevSong={handlePrevSong}
-          isPlaying={isPlaying}
-          isActive={isActive}
-          handlePlayPause={handlePlayPause}
-        />
-        <SeekBar
-          activeSong={activeSong}
-          seekTime={seekTime}
-          onInput={(e) => setSeekTime(e.target.value)}
-          max={duration}
-          value={appTime}
-        />
-        <Volume
-          min="0"
-          max="1"
-          value={volume}
-          onChange={(e) => setVolume(e.target.value)}
-          setVolume={setVolume}
-        />
-        <Player
-          activeSong={activeSong}
-          isPlaying={isPlaying}
-          currentIndex={currentIndex}
-          seekTime={seekTime}
-          onTimeUpdate={(e) => setAppTime(e.target.currentTime)}
-          onLoadedData={(e) => setDuration(e.target.duration)}
-          volume={volume}
-        />
+    isActive && (
+      <div className="player">
+        <div className="player-bottom">
+          <Controls
+            songsData={songsData}
+            currentIndex={currentIndex}
+            handleNextSong={handleNextSong}
+            handlePrevSong={handlePrevSong}
+            isPlaying={isPlaying}
+            isActive={isActive}
+            handlePlayPause={handlePlayPause}
+          />
+          <SeekBar
+            activeSong={activeSong}
+            seekTime={seekTime}
+            onInput={(e) => setSeekTime(e.target.value)}
+            max={duration}
+            value={appTime}
+          />
+          <Volume
+            min="0"
+            max="1"
+            value={volume}
+            onChange={(e) => setVolume(e.target.value)}
+            setVolume={setVolume}
+          />
+          <Player
+            activeSong={activeSong}
+            isPlaying={isPlaying}
+            currentIndex={currentIndex}
+            seekTime={seekTime}
+            onTimeUpdate={(e) => setAppTime(e.target.currentTime)}
+            onLoadedData={(e) => setDuration(e.target.duration)}
+            volume={volume}
+          />
+        </div>
       </div>
-    </div>
+    )
   );
 };
 
