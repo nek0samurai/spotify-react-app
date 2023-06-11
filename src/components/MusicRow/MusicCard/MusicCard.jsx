@@ -8,8 +8,7 @@ import { useDispatch } from 'react-redux';
 
 import { playPause, setActiveSong } from '../../../redux/slices/playerSlice';
 
-const MusicCard = ({ song, isPlaying, activeSong, songsData, i }) => {
-  console.log();
+const MusicCard = ({ song, isPlaying, activeSong, songsData, i, isActive }) => {
   const dispatch = useDispatch();
 
   const handlePauseClick = () => {
@@ -23,7 +22,7 @@ const MusicCard = ({ song, isPlaying, activeSong, songsData, i }) => {
 
   return (
     <>
-      <div key={song.id} className="card">
+      <div key={song.id} className={activeSong.id === songsData[i].id ? 'card active' : 'card'}>
         <div className="card__main">
           <div className="card__img">
             <img src={song.album.cover_medium} alt="" className="card__cover" />

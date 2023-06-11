@@ -1,5 +1,7 @@
 /* eslint-disable react/prop-types */
-const SeekBar = ({ activeSong }) => {
+const SeekBar = ({ activeSong, onInput, value, max }) => {
+  const time = Math.floor(value);
+
   return (
     <div className="player-track">
       <div className="track-container">
@@ -9,8 +11,18 @@ const SeekBar = ({ activeSong }) => {
         </div>
         <div className="track-seekbar">
           <div className="track-slider">
-            <input className="track-slider__input" type="range" name="" min="0" max="30" step="1" />
+            <input
+              className="track-slider__input"
+              value={value}
+              type="range"
+              name=""
+              min="0"
+              max={max}
+              step="any"
+              onInput={onInput}
+            />
           </div>
+          <p className="track-time">0:{time < 10 ? '0' + time : time}</p>
         </div>
       </div>
     </div>

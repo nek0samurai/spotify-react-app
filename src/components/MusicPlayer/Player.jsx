@@ -1,9 +1,12 @@
 /* eslint-disable react/prop-types */
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
 
-const Player = ({ activeSong, isPlaying }) => {
-  console.log(activeSong);
+const Player = ({ activeSong, isPlaying, seekTime, onTimeUpdate, onLoadedData }) => {
   const ref = useRef(null);
+
+  useEffect(() => {
+    ref.current.currentTime = seekTime;
+  }, [seekTime]);
 
   if (ref.current) {
     if (!isPlaying) {
@@ -15,7 +18,13 @@ const Player = ({ activeSong, isPlaying }) => {
     }
   }
 
-  return <audio src={activeSong.preview} ref={ref}></audio>;
+  return (
+    <audio
+      src={activeSong.preview}
+      ref={ref}
+      onTimeUpdate={onTimeUpdate}
+      onLoadedData={onLoadedData}></audio>
+  );
 };
 
 export default Player;

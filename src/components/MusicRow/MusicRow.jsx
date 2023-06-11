@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 import MusicCard from './MusicCard/MusicCard';
 
 const MusicRow = () => {
-  const { songsData, activeSong, isPlaying, isLoading, error } = useSelector(
+  const { songsData, activeSong, isPlaying, isLoading, error, isActive } = useSelector(
     (state) => state.player,
   );
 
@@ -26,6 +26,7 @@ const MusicRow = () => {
               key={song.id}
               isPlaying={isPlaying}
               activeSong={activeSong}
+              isActive={isActive}
               i={i}></MusicCard>
           ))}
         </div>
