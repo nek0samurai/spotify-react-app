@@ -31,6 +31,9 @@ export const playerSlice = createSlice({
       state.isActive = true;
       state.currentIndex = action.payload.i;
     },
+    setCurrentArtist: (state, action) => {
+      state.currentArtist = state.songsData.artist;
+    },
     nextSong: (state, action) => {
       state.activeSong = state.songsData[action.payload];
       state.currentIndex = action.payload;
@@ -59,39 +62,39 @@ export const playerSlice = createSlice({
         state.error = action.payload;
         state.isLoading = false;
         state.songsData = [];
-      })
-      .addCase(getCurrentArtist.fulfilled, (state, action) => {
-        state.currentArtist = action.payload;
-
-        state.isLoading = false;
-        state.error = '';
-      })
-      .addCase(getCurrentArtist.pending, (state) => {
-        state.currentArtist = [];
-        state.isLoading = true;
-        state.error = '';
-      })
-      .addCase(getCurrentArtist.rejected, (state, action) => {
-        state.error = action.payload;
-        state.isLoading = false;
-        state.currentArtist = [];
-      })
-      .addCase(getActiveSong.pending, (state) => {
-        state.isLoading = true;
-      })
-      .addCase(getActiveSong.fulfilled, (state, action) => {
-        state.activeSong = action.payload;
-        state.currentSongId = action.payload.id;
-        state.isLoading = false;
-        state.isPlaying = true;
-        state.error = '';
-      })
-      .addCase(getActiveSong.rejected, (state, action) => {
-        state.activeSong = {};
-        state.currentSongId = 0;
-        state.isLoading = false;
-        state.error = action.payload.error;
       });
+    // .addCase(getCurrentArtist.fulfilled, (state, action) => {
+    //   state.currentArtist = action.payload;
+
+    //   state.isLoading = false;
+    //   state.error = '';
+    // })
+    // .addCase(getCurrentArtist.pending, (state) => {
+    //   state.currentArtist = [];
+    //   state.isLoading = true;
+    //   state.error = '';
+    // })
+    // .addCase(getCurrentArtist.rejected, (state, action) => {
+    //   state.error = action.payload;
+    //   state.isLoading = false;
+    //   state.currentArtist = [];
+    // })
+    // .addCase(getActiveSong.pending, (state) => {
+    //   state.isLoading = true;
+    // })
+    // .addCase(getActiveSong.fulfilled, (state, action) => {
+    //   state.activeSong = action.payload;
+    //   state.currentSongId = action.payload.id;
+    //   state.isLoading = false;
+    //   state.isPlaying = true;
+    //   state.error = '';
+    // })
+    // .addCase(getActiveSong.rejected, (state, action) => {
+    //   state.activeSong = {};
+    //   state.currentSongId = 0;
+    //   state.isLoading = false;
+    //   state.error = action.payload.error;
+    // });
   },
 });
 

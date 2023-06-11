@@ -10,6 +10,7 @@ const MusicPlayer = () => {
   const [seekTime, setSeekTime] = useState(0);
   const [appTime, setAppTime] = useState(0);
   const [duration, setDuration] = useState(0);
+  const [volume, setVolume] = useState(0.3);
   const dispatch = useDispatch();
   const { activeSong, isPlaying, songsData, currentIndex, isActive } = useSelector(
     (state) => state.player,
@@ -62,7 +63,13 @@ const MusicPlayer = () => {
           max={duration}
           value={appTime}
         />
-        <Volume />
+        <Volume
+          min="0"
+          max="1"
+          value={volume}
+          onChange={(e) => setVolume(e.target.value)}
+          setVolume={setVolume}
+        />
         <Player
           activeSong={activeSong}
           isPlaying={isPlaying}
@@ -70,6 +77,7 @@ const MusicPlayer = () => {
           seekTime={seekTime}
           onTimeUpdate={(e) => setAppTime(e.target.currentTime)}
           onLoadedData={(e) => setDuration(e.target.duration)}
+          volume={volume}
         />
       </div>
     </div>

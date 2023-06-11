@@ -22,9 +22,9 @@ const SeekBar = ({ activeSong, onInput, value, max }) => {
               onInput={onInput}
             />
           </div>
-          <p className="track-time">0:{time < 10 ? '0' + time : time}</p>
         </div>
       </div>
+      <p className="track-time">0:{time < 10 ? '0' + time : time}</p>
     </div>
   );
 };

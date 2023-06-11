@@ -1,8 +1,12 @@
 /* eslint-disable react/prop-types */
 import { useRef, useEffect } from 'react';
 
-const Player = ({ activeSong, isPlaying, seekTime, onTimeUpdate, onLoadedData }) => {
+const Player = ({ activeSong, isPlaying, seekTime, onTimeUpdate, onLoadedData, volume }) => {
   const ref = useRef(null);
+
+  useEffect(() => {
+    ref.current.volume = volume;
+  }, [volume]);
 
   useEffect(() => {
     ref.current.currentTime = seekTime;
