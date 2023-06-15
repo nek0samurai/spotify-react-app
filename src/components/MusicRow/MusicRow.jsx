@@ -16,7 +16,7 @@ const MusicRow = () => {
         <span className="line-row__album">Альбом</span>
       </div>
       <>
-        {error && <h1>Error. Try again</h1>}
+        {error && <h1>{error}</h1>}
         {isLoading && <h1>Loading</h1>}
         <div className="card-row ">
           {songs.map((song, i) => (

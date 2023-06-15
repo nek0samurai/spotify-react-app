@@ -148,7 +148,14 @@
     color: #fff;
     font-size: .9rem;
     cursor: pointer;
+}
 
+.card__artist-item {
+    grid-column: 7 / 9;
+}
+
+.card__artist-item:hover {
+    cursor: pointer;
 }
 
 .card.active .card__artist {
