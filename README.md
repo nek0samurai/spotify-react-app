@@ -7,4 +7,6 @@ Deezer Rapid Api
 Музыкальное приложение (реплика Deezer), работающее через Deezer Rapid API, 
 а также DeezerAPI. 
 
+Предоставляет треки только в режиме preview
+
 Работает через VPN
