@@ -1,4 +1,4 @@
-# spotify-react-app
+# deezer-react-app
 
 Deezer Rapid Api 
 
